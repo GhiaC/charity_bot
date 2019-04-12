@@ -1,6 +1,7 @@
 Config/bot_config.py
 bot.config.py
 telegram
+charity.sqlite
 ./charity.sqlite
 __pycache__/
 *.py[cod]

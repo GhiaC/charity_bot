@@ -57,31 +57,29 @@ def bot_handlers(dp):
             ],
 
             ##############################################################
-            # select user
             BotState.help_user_step_1: [
                 CommandHandler(Command.start, start, pass_user_data=True),
                 MessageHandler(filters=Filters.text, callback=help_user_step_1_handler, pass_user_data=True)
             ],
-            # get amount
             BotState.help_user_step_2: [
                 CommandHandler(Command.start, start, pass_user_data=True),
                 MessageHandler(filters=Filters.text, callback=help_user_step_2_handler, pass_user_data=True)
             ],
-            # get description
             BotState.help_user_step_3: [
                 CommandHandler(Command.start, start, pass_user_data=True),
                 MessageHandler(filters=Filters.text, callback=help_user_step_3_handler, pass_user_data=True)
             ],
             ##############################################################
-            # select user
             BotState.add_admin_step_1: [
                 CommandHandler(Command.start, start, pass_user_data=True),
                 MessageHandler(filters=Filters.text, callback=add_admin_step_1_handler, pass_user_data=True)
             ],
-            # get amount
             BotState.add_admin_step_2: [
                 CommandHandler(Command.start, start, pass_user_data=True),
-                MessageHandler(filters=Filters.text, callback=add_admin_step_2_handler, pass_user_data=True)
+                RegexHandler(pattern=Pattern.absolute.format(ButtonMessage.yes),
+                             callback=add_admin_step_2_handler, pass_user_data=True),
+                RegexHandler(pattern=Pattern.absolute.format(ButtonMessage.no),
+                             callback=add_admin_step_2_cancel_handler, pass_user_data=True),
             ],
             ##############################################################
             BotState.show_helps_by_user_step_1_handler: [
@@ -89,9 +87,7 @@ def bot_handlers(dp):
                 MessageHandler(filters=Filters.text, callback=show_helps_by_user_step_1_handler, pass_user_data=True)
             ],
             ##############################################################
-
         },
-
         fallbacks=[CommandHandler(Command.cancel, start)]
     )
     dp.add_handler(conversation_handler)

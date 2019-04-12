@@ -6,3 +6,6 @@ class ButtonMessage:
     submit_help = "ثبت کمک"
     show_help_by_user = "نمایش کمک ها بر اساس نیازمند"
     show_all_helps = "نمایش همه ی کمک ها"
+
+    yes = "بله"
+    no = "خیر"

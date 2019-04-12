@@ -27,7 +27,6 @@ class database:
         return len(result_set) != 0
 
     def is_exist_user_by_id(self, user_id):
-        print(int(user_id) + 1)
         query = db.select([user]).where(user.columns.id == int(user_id))
         result = self.connection.execute(query)
         result_set = result.fetchall()
@@ -55,7 +54,6 @@ class database:
         query = query.select_from(help_table.join(user, user.columns.id == help_table.columns.user_id))
         ResultProxy2 = self.connection.execute(query)
         ResultSet = ResultProxy2.fetchall()
-        print(ResultSet)
         return ResultSet
 
     def get_all_helps_order_by_user_id(self, user_id):
