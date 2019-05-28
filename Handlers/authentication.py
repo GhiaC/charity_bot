@@ -20,9 +20,11 @@ def start(bot, update, user_data):
                              reply_markup=ReplyKeyboardMarkup([[
                                  ButtonMessage.add_admin,
                                  ButtonMessage.add_user,
+                                 ButtonMessage.remove_user,
                                  ButtonMessage.submit_help,
                                  ButtonMessage.show_help_by_user,
-                                 ButtonMessage.show_all_helps]],
+                                 ButtonMessage.show_all_helps,
+                                 ButtonMessage.back_to_main]],
                                  one_time_keyboard=True))
             return BotState.admin_menu
         else:

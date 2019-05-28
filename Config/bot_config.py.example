@@ -3,6 +3,6 @@ import os
 
 class Bot:
     base_url = os.getenv("BASE_URL", "https://tapi.bale.ai/")
-    bot_token = os.getenv("TOKEN", "YOUR_TOKEN")
+    bot_token = os.getenv("TOKEN", "")
     poll_interval = int(os.getenv("POLL_INTERVAL", 2))
-    first_admin = "ghiac"
+    first_admin = "alhich"
