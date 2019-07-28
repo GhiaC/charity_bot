@@ -13,4 +13,5 @@ class BotMessage:
     are_u_sure = "ادامه میدهید؟ بله / خیر"
     success = "با موفقیت انجام شد"
     cancel = "لغو شد"
-    select_user = "بر روی گیرنده مورد نظر کلیک کنید"
+    select_user = "شماره ملی گیرنده را وارد کنید"
+

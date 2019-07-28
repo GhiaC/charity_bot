@@ -32,14 +32,25 @@ class database:
         result_set = result.fetchall()
         return len(result_set) != 0
 
+    def is_exist_user_by_nation_id(self, nation_id):
+        query = db.select([user]).where(user.columns.nation_id == nation_id)
+        result = self.connection.execute(query)
+        result_set = result.fetchall()
+        return len(result_set) != 0
+
     def insert_user(self, name, phonenumber, nationid, description):
         query = db.insert(user).values(name=name, nation_id=nationid, phone_number=phonenumber,
                                        user_description=description)
         ResultProxy = self.connection.execute(query)
         return True
 
-    def insert_help(self, id, amount, descripition):
-        query = db.insert(help_table).values(user_id=id, amount=amount, description=descripition)
+    def remove_user(self, nation_id):
+        query = db.delete(user).where(user.columns.nation_id == nation_id)
+        ResultProxy = self.connection.execute(query)
+        return True
+
+    def insert_help(self, nation_id, amount, descripition):
+        query = db.insert(help_table).values(nation_id=nation_id, amount=amount, description=descripition)
         ResultProxy = self.connection.execute(query)
         return True
 
@@ -51,13 +62,19 @@ class database:
 
     def get_all_helps(self):
         query = select([help_table, user])
-        query = query.select_from(help_table.join(user, user.columns.id == help_table.columns.user_id))
+        query = query.select_from(help_table.join(user, user.columns.nation_id == help_table.columns.nation_id))
         ResultProxy2 = self.connection.execute(query)
         ResultSet = ResultProxy2.fetchall()
         return ResultSet
 
     def get_all_helps_order_by_user_id(self, user_id):
         query = select([help_table]).where(help_table.columns.user_id == user_id)
+        ResultProxy2 = self.connection.execute(query)
+        ResultSet = ResultProxy2.fetchall()
+        return ResultSet
+
+    def get_all_helps_order_by_nation_id(self, nation_id):
+        query = select([help_table]).where(help_table.columns.nation_id == nation_id)
         ResultProxy2 = self.connection.execute(query)
         ResultSet = ResultProxy2.fetchall()
         return ResultSet
